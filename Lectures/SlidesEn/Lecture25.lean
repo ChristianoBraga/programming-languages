@@ -5,6 +5,8 @@ Slides of Lecture 25. Each top level section is a slide.
 import VersoManual
 import Lectures.Meta.SlideDeck
 import CoreCpp
+import Lectures.Paradigms.Fragment
+import Lectures.Paradigms.Logic
 
 open Verso.Genre Manual
 open Verso.Genre.Manual.InlineLean

@@ -5,7 +5,7 @@
    "type": "git",
    "subDir": null,
    "scope": "",
-   "rev": "60d306d70e2e4e2e9eb9e8d3992c987b5610e434",
+   "rev": "ac0c39a1f53a3bbfc16bdff4df47223e73c7c6bf",
    "name": "corecpp",
    "manifestFile": "lake-manifest.json",
    "inputRev": "main",
