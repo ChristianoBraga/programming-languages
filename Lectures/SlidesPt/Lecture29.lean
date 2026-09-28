@@ -5,6 +5,8 @@ Slides da Aula 29. Cada seção de nível superior é um slide.
 import VersoManual
 import Lectures.Meta.SlideDeck
 import CoreCpp
+import Lectures.Paradigms.Fragment
+import Lectures.Paradigms.Logic
 
 open Verso.Genre Manual
 open Verso.Genre.Manual.InlineLean

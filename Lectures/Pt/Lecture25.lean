@@ -5,6 +5,8 @@ import Lectures.Meta.Label
 import Lectures.Meta.Footnote
 import Lectures.Papers
 import CoreCpp
+import Lectures.Paradigms.Fragment
+import Lectures.Paradigms.Logic
 
 open Verso.Genre Manual
 open Verso.Genre.Manual.InlineLean
