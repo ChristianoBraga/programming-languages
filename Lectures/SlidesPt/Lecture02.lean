@@ -44,7 +44,7 @@ open CoreCpp
 
 * C++ decide com uma tabela de símbolos durante a análise sintática. Core C++ decide *no léxico*.
 
-* `std::function` e `std::vector` são um token cada, e não há o token `>>`.
+* Um identificador antes de `::` é um *identificador de namespace*, então `std::vector<int>` abre um tipo e a biblioteca dispensa palavra reservada. Não há o token `>>`.
 
 # §2.1 O analisador léxico em Lean
 

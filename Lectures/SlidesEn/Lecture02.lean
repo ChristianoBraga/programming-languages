@@ -44,7 +44,7 @@ open CoreCpp
 
 * C++ decides with a symbol table during parsing. Core C++ decides *in the lexer*.
 
-* `std::function` and `std::vector` are one token each, and there is no token `>>`.
+* An identifier before `::` is a *namespace identifier*, so `std::vector<int>` opens a type and the library needs no reserved word. There is no token `>>`.
 
 # §2.1 The lexer in Lean
 

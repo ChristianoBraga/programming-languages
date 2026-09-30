@@ -36,7 +36,7 @@ tag := "lexical"
 
 A program reaches the language processor as a sequence of characters. *Lexical analysis* turns it into a sequence of *tokens*, the smallest units with syntactic meaning, and discards white space, line breaks and comments. A token has a *class*, such as identifier or integer literal, and a *lexeme*, the text that forms it.
 
-The tokens of Core C++ fall into five classes, and {numref}[tbl-tokens] describes them.
+The tokens of Core C++ fall into six classes, and {numref}[tbl-tokens] describes them.
 
 :::table +header
 *
@@ -46,7 +46,11 @@ The tokens of Core C++ fall into five classes, and {numref}[tbl-tokens] describe
 *
   * reserved word
   * fixed names of the language
-  * `int`, `while`, `return`, `class`, `std::vector`
+  * `int`, `while`, `return`, `class`, `namespace`
+*
+  * namespace identifier
+  * an identifier whose next token is `::`
+  * `std` in `std::vector`, `Geometry` in `Geometry::Shape`
 *
   * type identifier
   * uppercase initial
@@ -65,7 +69,7 @@ The tokens of Core C++ fall into five classes, and {numref}[tbl-tokens] describe
   * `+`, `<=`, `->`, `[=]`, `{`, `;`
 :::
 
-{tabcap "tbl-tokens"}[The five token classes of Core C++.]
+{tabcap "tbl-tokens"}[The six token classes of Core C++.]
 
 The distinction between type identifiers and variable identifiers by their initial is a *lexical convention* of Core C++ that C++ lacks. It exists so that the lexer decides, without context, whether `<` opens a template argument list or compares two values. In `Stack<int>` the `<` follows a type identifier, and in `x < y` it follows a variable identifier. C++ resolves this ambiguity with a symbol table consulted during parsing, and Core C++ resolves it in the lexer.{fnref}[stdfunction]
 
@@ -100,7 +104,7 @@ Except.error "unexpected character '@'"
 
 :::footnotes
 
-{fnAnchor "stdfunction"}[] The names `std::function` and `std::vector` start with a lowercase letter, so the convention would classify them as variable identifiers. The lexer recognises them before the identifier rule and treats them as reserved words, one token each. For the same reason Core C++ has no token `>>`, and `Stack<Stack<int>>` closes with two tokens `>`, which C++ only came to accept in C++11.
+{fnAnchor "stdfunction"}[] The library breaks the convention, since `std` and `vector` are both lowercase and `std::vector` names a type. The namespace identifier settles it. A pass over the token array marks as one every identifier whose next token is `::`, so `std::vector<int>` opens a type although the case alone would read a variable, and the library needs no reserved word and no production of its own. Core C++ has no token `>>` either, so `Stack<Stack<int>>` closes with two tokens `>`, which C++ only came to accept in C++11.
 
 :::
 

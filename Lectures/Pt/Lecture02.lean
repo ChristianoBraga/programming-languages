@@ -37,7 +37,7 @@ tag := "lexico"
 
 Um programa chega ao processador de linguagem como uma sequência de caracteres. A *análise léxica* a transforma em uma sequência de *tokens*, as menores unidades com significado sintático, e descarta espaços, quebras de linha e comentários. Um token tem uma *classe*, como identificador ou literal inteiro, e um *lexema*, o texto que o forma.
 
-Os tokens de Core C++ caem em cinco classes, e a {numref}[tbl-tokens] as descreve.
+Os tokens de Core C++ caem em seis classes, e a {numref}[tbl-tokens] as descreve.
 
 :::table +header
 *
@@ -47,7 +47,11 @@ Os tokens de Core C++ caem em cinco classes, e a {numref}[tbl-tokens] as descrev
 *
   * palavra reservada
   * nomes fixos da linguagem
-  * `int`, `while`, `return`, `class`, `std::vector`
+  * `int`, `while`, `return`, `class`, `namespace`
+*
+  * identificador de namespace
+  * identificador cujo próximo token é `::`
+  * `std` em `std::vector`, `Geometry` em `Geometry::Shape`
 *
   * identificador de tipo
   * inicial maiúscula
@@ -66,7 +70,7 @@ Os tokens de Core C++ caem em cinco classes, e a {numref}[tbl-tokens] as descrev
   * `+`, `<=`, `->`, `[=]`, `{`, `;`
 :::
 
-{tabcap "tbl-tokens"}[As cinco classes de tokens de Core C++.]
+{tabcap "tbl-tokens"}[As seis classes de tokens de Core C++.]
 
 A distinção entre identificador de tipo e identificador de variável pela inicial é uma *convenção léxica* de Core C++ que C++ não tem. Ela existe para que o analisador léxico decida, sem contexto, se `<` abre uma lista de argumentos de template ou compara dois valores. Em `Stack<int>` o `<` segue um identificador de tipo, e em `x < y` segue um identificador de variável. C++ resolve essa ambiguidade com uma tabela de símbolos consultada durante a análise sintática, e Core C++ a resolve no léxico.{fnref}[stdfunction]
 
@@ -101,7 +105,7 @@ Except.error "unexpected character '@'"
 
 :::footnotes
 
-{fnAnchor "stdfunction"}[] Os nomes `std::function` e `std::vector` começam com minúscula, então a convenção os classificaria como identificadores de variável. O analisador léxico os reconhece antes da regra de identificador e os trata como palavras reservadas, um token cada. Pelo mesmo motivo Core C++ não tem o token `>>`, e `Stack<Stack<int>>` fecha com dois tokens `>`, o que C++ só passou a aceitar em C++11.
+{fnAnchor "stdfunction"}[] A biblioteca quebra a convenção, porque `std` e `vector` são minúsculos e `std::vector` nomeia um tipo. O identificador de namespace resolve. Uma passagem sobre o vetor de tokens marca como tal todo identificador cujo próximo token é `::`, então `std::vector<int>` abre um tipo embora a caixa sozinha lesse uma variável, e a biblioteca dispensa palavra reservada e produção próprias. Core C++ também não tem o token `>>`, e `Stack<Stack<int>>` fecha com dois tokens `>`, o que C++ só passou a aceitar em C++11.
 
 :::
 
